@@ -9,10 +9,10 @@ skynet.start(function()
 	if not skynet.getenv "daemon" then
 		local console = skynet.newservice("console")
 	end
-	skynet.newservice("debug_console",8000)
+	skynet.newservice("debug_console", 8000)
 	skynet.newservice("simpledb")
 	local watchdog = skynet.newservice("watchdog")
-	local addr,port = skynet.call(watchdog, "lua", "start", {
+	local addr, port = skynet.call(watchdog, "lua", "start", {
 		port = 8888,
 		maxclient = max_client,
 		nodelay = true,
