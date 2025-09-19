@@ -9,6 +9,6 @@ skynet.start(
         if not src_handle or not dst_handle then
             return
         end
-        skynet.redirect(src_handle, dst_handle, 'lua', 0, skynet.pack('get', 'hello'))
+        skynet.redirect(dst_handle, src_handle, 'lua', 0, skynet.pack('get', 'hello'))
     end
 )
