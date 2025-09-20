@@ -48,6 +48,26 @@ jemalloc : $(MALLOC_STATICLIB)
 update3rd :
 	rm -rf 3rd/jemalloc && git submodule update --init
 
+# cmsgpack
+
+CMARK_SO := 3rd/lua-cmsgpack/cmsgpack.so
+
+$(CMARK_SO) :
+	cd 3rd/lua-cmsgpack && $(MAKE) CC='$(CC)' LUA_INCLUDE_DIR='$(LUA_INC)'
+
+$(LUA_CLIB_PATH)/cmsgpack.so : $(CMARK_SO) | $(LUA_CLIB_PATH)
+	cp -f $< $@
+
+# openssl
+
+OPENSSL_SO := 3rd/lua-openssl/openssl.so
+
+$(OPENSSL_SO) :
+	cd 3rd/lua-openssl && $(MAKE) CC='$(CC)'
+
+$(LUA_CLIB_PATH)/openssl.so : $(OPENSSL_SO) | $(LUA_CLIB_PATH)
+	cp -f $< $@
+
 # skynet
 
 CSERVICE = snlua logger gate harbor
